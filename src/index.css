@@ -1,13 +1,100 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@font-face {
+  font-family: 'Satoshi';
+  src:
+    url('./assets/fonts/Satoshi-Light.woff2') format('woff2'),
+    url('./assets/fonts/Satoshi-Light.woff') format('woff'),
+    url('./assets/fonts/Satoshi-Light.ttf') format('truetype');
+  font-weight: 300;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Satoshi';
+  src:
+    url('./assets/fonts/Satoshi-Regular.woff2') format('woff2'),
+    url('./assets/fonts/Satoshi-Regular.woff') format('woff'),
+    url('./assets/fonts/Satoshi-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Satoshi';
+  src:
+    url('./assets/fonts/Satoshi-Medium.woff2') format('woff2'),
+    url('./assets/fonts/Satoshi-Medium.woff') format('woff'),
+    url('./assets/fonts/Satoshi-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Satoshi';
+  src:
+    url('./assets/fonts/Satoshi-Bold.woff2') format('woff2'),
+    url('./assets/fonts/Satoshi-Bold.woff') format('woff'),
+    url('./assets/fonts/Satoshi-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Satoshi';
+  src:
+    url('./assets/fonts/Satoshi-Black.woff2') format('woff2'),
+    url('./assets/fonts/Satoshi-Black.woff') format('woff'),
+    url('./assets/fonts/Satoshi-Black.ttf') format('truetype');
+  font-weight: 900;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Satoshi';
+  src:
+    url('./assets/fonts/Satoshi-Italic.woff2') format('woff2'),
+    url('./assets/fonts/Satoshi-Italic.woff') format('woff'),
+    url('./assets/fonts/Satoshi-Italic.ttf') format('truetype');
+  font-weight: 400;
+  font-style: italic;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --grey-100: #d9d9d9;
+  --grey-500: #464646;
+  --grey-700: #2e2e2e;
+  --main-color: #3187ff;
+  --accent-color: #78ffd2;
+
+  --space-3xs: clamp(0.25rem, 0.3304rem + -0.0893vw, 0.3125rem);
+  --space-2xs: clamp(0.5rem, 0.5804rem + -0.0893vw, 0.5625rem);
+  --space-xs: clamp(0.75rem, 0.9107rem + -0.1786vw, 0.875rem);
+  --space-s: clamp(1rem, 1.1607rem + -0.1786vw, 1.125rem);
+  --space-m: clamp(1.5rem, 1.7411rem + -0.2679vw, 1.6875rem);
+  --space-l: clamp(2rem, 2.3214rem + -0.3571vw, 2.25rem);
+  --space-xl: clamp(3rem, 3.4821rem + -0.5357vw, 3.375rem);
+  --space-2xl: clamp(4rem, 4.6429rem + -0.7143vw, 4.5rem);
+  --space-3xl: clamp(6rem, 6.9643rem + -1.0714vw, 6.75rem);
+
+  --step--2: clamp(0.64rem, 0.8216rem + -0.2018vw, 0.7813rem);
+  --step--1: clamp(0.8rem, 0.9768rem + -0.1964vw, 0.9375rem);
+  --step-0: clamp(1rem, 1.1607rem + -0.1786vw, 1.125rem);
+  --step-1: clamp(1.25rem, 1.3786rem + -0.1429vw, 1.35rem);
+  --step-2: clamp(1.5625rem, 1.6364rem + -0.0821vw, 1.62rem);
+  --step-3: clamp(1.944rem, 1.9414rem + 0.013vw, 1.9531rem);
+  --step-4: clamp(2.3328rem, 2.3018rem + 0.1552vw, 2.4414rem);
+  --step-5: clamp(2.7994rem, 2.7272rem + 0.3606vw, 3.0518rem);
+}
+
+html,
+body,
+#root {
+  min-height: 100vh;
+}
+
+body {
+  font-family: 'Satoshi';
+  background-color: var(--grey-500);
 }

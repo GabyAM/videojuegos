@@ -1,0 +1,50 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  color: white;
+}
+
+.thumbnail-section {
+  display: grid;
+}
+.thumbnail-section > * {
+  grid-area: 1/1/1/1;
+}
+
+.thumbnail-info {
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: var(--space-xs);
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.25),
+    rgba(0, 0, 0, 0.75)
+  );
+}
+
+.title {
+  font-size: var(--step-0);
+}
+.image {
+  aspect-ratio: 1.76 / 1;
+  max-width: 100%;
+  z-index: 0;
+}
+
+.info-section {
+  background-color: var(--grey-700);
+  padding: var(--space-xs) var(--space-xs);
+}
+
+.upper-section {
+  display: flex;
+  justify-content: space-between;
+}
+
+.score {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2xs);
+}

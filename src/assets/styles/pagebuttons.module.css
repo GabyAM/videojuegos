@@ -1,0 +1,24 @@
+.container {
+  background-color: var(--grey-700);
+  display: flex;
+  flex-direction: row;
+
+  width: fit-content;
+}
+
+.button {
+  padding: var(--space-xs) var(--space-xs);
+  height: 100%;
+  background: none;
+  border: none;
+  color: white;
+  font-weight: 700;
+}
+
+.button.current {
+  background-color: var(--main-color);
+}
+
+.button:not(.current):hover {
+  background-color: rgba(255, 255, 255, 0.05);
+}

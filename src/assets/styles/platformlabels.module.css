@@ -1,0 +1,35 @@
+.container {
+	display: flex;
+	flex-wrap: wrap;
+	gap: var(--space-2xs);
+}
+
+.label {
+	padding: 0 var(--space-xs);
+	font-weight: 900;
+}
+
+.pc {
+	background-color: black;
+	color: white;
+}
+
+.ps {
+	background-color: #003791;
+	color: white;
+}
+
+.xbox {
+	background-color: #0f780f;
+	color: white;
+}
+
+.android {
+	background-color: #9fc037;
+	color: black;
+}
+
+.otro {
+	background-color: var(--grey-100);
+	color: var(--grey-700);
+}
