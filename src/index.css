@@ -98,3 +98,7 @@ body {
   font-family: 'Satoshi';
   background-color: var(--grey-500);
 }
+
+.pending {
+  opacity: 0.5;
+}

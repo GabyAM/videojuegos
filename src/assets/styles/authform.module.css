@@ -1,10 +1,3 @@
-.form-container {
-  display: flex;
-  width: 100%;
-  height: 100vh;
-  align-items: center;
-}
-
 .form {
   background-color: var(--grey-700);
   padding: var(--space-xs) var(--space-s);
@@ -16,8 +9,8 @@
   width: 100%;
   height: fit-content;
   padding: var(--space-xl) var(--space-l);
+  color: white;
 }
-
 .input-container {
   width: 100%;
   display: flex;
@@ -49,10 +42,16 @@
   position: absolute;
   transform: translate(var(--space-3xs), var(--space-2xs));
 }
+.input-wrapper.error::before {
+  background-color: red;
+}
 .input-wrapper:focus-within::before {
   /* background-color: var(--accent-color); */
 }
 
+.error-message {
+  font-style: italic;
+}
 .button {
   background-color: var(--main-color);
   font-size: var(--step-1);
@@ -61,4 +60,20 @@
   border: none;
   padding: var(--space-s) var(--space-m);
   width: fit-content;
+}
+
+.lower-section {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: var(--space-l);
+}
+
+.additional-message a {
+  font-weight: 700;
+  color: var(--main-color);
+  text-decoration: none;
+}
+.additional-message a:hover {
+  text-decoration: underline;
 }

@@ -1,9 +1,11 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
+import { useAuth } from './useAuth';
 
 export function usePagination(fetchFn) {
+  const { removeToken } = useAuth();
   const [data, setData] = useState();
-  const [isLoading, setIsLoading] = useState();
-  const [error, setError] = useState();
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   const [currentPage, setCurrentPage] = useState(1);
   const [pages, setPages] = useState(0);
@@ -19,19 +21,20 @@ export function usePagination(fetchFn) {
           setError(null);
         })
         .catch((error) => {
+          if (error.status === 401) {
+            removeToken();
+          }
           setError(error);
           setData(null);
         })
         .finally(() => setIsLoading(false));
     },
-    [fetchFn]
+    [fetchFn, removeToken]
   );
 
   useEffect(() => {
-    if (!data && !isLoading && !error) {
-      fetchPage(1);
-    }
-  }, [data, isLoading, error, fetchPage]);
+    fetchPage(1);
+  }, [fetchPage]);
 
   return { data, isLoading, error, fetchPage, currentPage, pages };
 }

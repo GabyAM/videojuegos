@@ -4,4 +4,5 @@
   grid-template-columns: 1fr 4fr;
   height: fit-content;
   min-height: 100vh;
+  padding: var(--space-xl) var(--space-xl);
 }

@@ -1,6 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import { AuthForm } from '../components/AuthForm';
 import { useAuth } from '../hooks/useAuth';
+import { AuthScreen } from '../components/AuthScreen';
 
 function login(data) {
   return fetch('http://localhost/login', {
@@ -8,13 +9,15 @@ function login(data) {
     body: JSON.stringify(data),
     headers: { 'Content-Type': 'application/json' }
   }).then((res) => {
-    if (!res.ok) throw new Error('Error al iniciar sesion');
+    if (!res.ok && res.status !== 400) {
+      throw new Error('Error al iniciar sesion');
+    }
     return res.json();
   });
 }
 
 export function Login() {
-  const { updateToken } = useAuth();
+  const { updateToken, isAuthenticated } = useAuth();
   const navigate = useNavigate();
 
   const onLogin = ({ token }) => {
@@ -22,11 +25,17 @@ export function Login() {
     navigate('/');
   };
 
+  if (isAuthenticated) navigate('/');
+
   return (
-    <AuthForm
-      label="Iniciar sesión"
-      onSubmit={login}
-      onSuccess={onLogin}
-    ></AuthForm>
+    <>
+      <AuthScreen>
+        <AuthForm
+          label="Iniciar sesión"
+          onSubmit={login}
+          onSuccess={onLogin}
+        ></AuthForm>
+      </AuthScreen>
+    </>
   );
 }

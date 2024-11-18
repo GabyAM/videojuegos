@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { jwtDecode } from 'jwt-decode';
 import { AuthContext } from './context';
 
@@ -40,6 +40,7 @@ export function AuthProvider({ children }) {
     setToken({ encoded: null, decoded: null });
     setIsLoading(false);
   }
+
   return (
     <AuthContext.Provider
       value={{

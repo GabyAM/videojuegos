@@ -1,0 +1,23 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-l);
+  color: white;
+}
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-m);
+  max-width: 600px;
+}
+
+.input-container {
+  width: 100%;
+}
+.input {
+  width: 100%;
+}
+
+.error-message {
+  font-style: italic;
+}

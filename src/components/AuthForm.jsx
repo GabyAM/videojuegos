@@ -25,7 +25,7 @@ export function AuthForm({ data, label, onSubmit, onSuccess }) {
           Object.keys(res.errors).forEach((key) => {
             setError(key, {
               type: 'server',
-              message: Object.values(res.errors[key])
+              message: res.errors[key]
             });
           });
           return;
@@ -44,29 +44,83 @@ export function AuthForm({ data, label, onSubmit, onSuccess }) {
       <form className={style.form} onSubmit={handleSubmit(handleFormSubmit)}>
         <div className={style['input-container']}>
           <label htmlFor="nombre_usuario">Nombre de usuario</label>
-          <div className={style['input-wrapper']}>
+          <div
+            className={`${style['input-wrapper']} ${errors && errors['nombre_usuario'] ? style.error : ''}`}
+          >
             <input
-              className={style.input}
+              className={`${style.input}`}
               type="text"
               name="nombre_usuario"
               id="nombre_usuario"
-              {...register('nombre_usuario')}
+              {...register('nombre_usuario', {
+                required: 'El nombre de usuario es requerido',
+                minLength: {
+                  value: 6,
+                  message:
+                    'El nombre de usuario debe tener al menos 6 caracteres'
+                },
+                maxLength: {
+                  value: 20,
+                  message:
+                    'El nombre de usuario debe tener a lo sumo 20 caracteres'
+                }
+              })}
             ></input>
           </div>
+          {errors && errors['nombre_usuario'] && (
+            <span className={style['error-message']}>
+              {errors['nombre_usuario'].message}
+            </span>
+          )}
         </div>
         <div className={style['input-container']}>
           <label htmlFor="clave">Clave</label>
-          <div className={style['input-wrapper']}>
+          <div
+            className={`${style['input-wrapper']} ${errors && errors['clave'] ? style.error : ''}`}
+          >
             <input
               className={style.input}
-              type="text"
+              type="password"
               name="clave"
               id="clave"
-              {...register('clave')}
+              {...register('clave', {
+                required: 'La clave es requerida',
+                minLength: {
+                  value: 8,
+                  message: 'La clave debe tener al menos 8 caracteres'
+                },
+                pattern: {
+                  value:
+                    /^.*(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]).*$/,
+                  message:
+                    'La clave debe contener al menos 1 mayúscula, 1 minúscula, 1 número y 1 caracter especial'
+                }
+              })}
             ></input>
           </div>
+          {errors && errors['clave'] && (
+            <span className={style['error-message']}>
+              {errors['clave'].message}
+            </span>
+          )}
         </div>
-        <button className={style.button}>{label}</button>
+        <div className={style['lower-section']}>
+          <button
+            disabled={isSubmitting}
+            className={`${style.button} ${isSubmitting ? 'pending' : ''}`}
+          >
+            {label}
+          </button>
+          {label === 'Iniciar sesión' ? (
+            <span className={style['additional-message']}>
+              No tenés cuenta? <a href="registro">registrate</a> ahora
+            </span>
+          ) : (
+            <span className={style['additional-message']}>
+              Ya tenes cuenta? <a href="login">iniciá sesion</a> ahora
+            </span>
+          )}
+        </div>
       </form>
     </div>
   );

@@ -30,10 +30,15 @@
 .image {
   aspect-ratio: 1.76 / 1;
   max-width: 100%;
+  width: 100%;
   z-index: 0;
+  object-fit: cover;
 }
 
 .info-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
   background-color: var(--grey-700);
   padding: var(--space-xs) var(--space-xs);
 }
