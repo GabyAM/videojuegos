@@ -15,6 +15,7 @@ En base a la devolución del trabajo, se realizaron los siguientes arreglos:
 - Las imagenes de los juegos ahora son visibles en la pagina de detalle
 - Se modificó el funcionamiento del filtro de clasificacion de edad
 - Se creó una nueva clase de excepción en la API para manejar errores de validación de forma mas fácil.
+- Ahora se guarda el token y la fecha de vencimiento en la base de datos al hacer login (aunque no se usa en mi implementación de autenticación). Se modificó el tipo de dato del campo "token" en la tabla usuario para que pueda entrar un JWT
 
 ## Cambios hechos en API
 
