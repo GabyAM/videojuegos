@@ -27,7 +27,7 @@ export function GamesList({ filters }) {
   const fetchFn = useCallback(
     (page) =>
       fetchGames(page, filters.search, filters.platform, filters.rating),
-    [filters.search, filters.platform, filters.rating]
+    [filters]
   );
 
   const {
@@ -55,8 +55,8 @@ export function GamesList({ filters }) {
             id={game.id}
             title={game.nombre}
             image={game.imagen}
-            score={game.promedio_calificaciones}
-            totalScores={game.cantidad_calificaciones}
+            initialScore={game.promedio_calificaciones}
+            initialTotalScores={game.cantidad_calificaciones}
             ageRating={game.clasificacion_edad}
             platforms={game.plataformas}
           ></GameCard>

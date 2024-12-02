@@ -12,9 +12,8 @@ export function useFetch(fetchFn, { shouldFetch = true } = {}) {
       setIsLoading(false);
       return;
     }
-    let controller = new AbortController();
     setIsLoading(true);
-    fetchFn(controller.signal)
+    fetchFn()
       .then((data) => {
         setData(data);
         setError(null);
@@ -27,8 +26,6 @@ export function useFetch(fetchFn, { shouldFetch = true } = {}) {
         setData(null);
       })
       .finally(() => setIsLoading(false));
-
-    return controller?.abort();
   }, [shouldFetch, setIsLoading, setData, setError, fetchFn, removeToken]);
 
   return {

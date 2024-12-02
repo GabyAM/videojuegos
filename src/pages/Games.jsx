@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useRef, useState } from 'react';
 import { GamesFilters } from '../components/GamesFilters';
 import { GamesList } from '../components/GamesList';
 import style from '../assets/styles/games.module.css';
@@ -14,7 +14,16 @@ export function Games() {
   });
 
   const handleFilterChange = useCallback((newFilters) => {
-    setFilters(newFilters);
+    setFilters((prevFilters) => {
+      if (
+        prevFilters.search !== newFilters.search ||
+        prevFilters.platform !== newFilters.platform ||
+        prevFilters.rating !== newFilters.rating
+      ) {
+        return newFilters;
+      }
+      return prevFilters;
+    });
   }, []);
 
   return (

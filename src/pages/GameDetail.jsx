@@ -44,7 +44,12 @@ export function GameDetail() {
   return (
     <div className={style.detail}>
       <div className={style.card}>
-        <img className={style.image} src={game?.imagen || placeholder}></img>
+        <img
+          className={style.image}
+          src={
+            game?.imagen ? `data:image/jpeg;base64,${game.imagen}` : placeholder
+          }
+        ></img>
         <div className={style.info}>
           <h2>{game.nombre}</h2>
           <div className={style['lower-info']}>

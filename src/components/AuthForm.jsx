@@ -121,6 +121,11 @@ export function AuthForm({ data, label, onSubmit, onSuccess }) {
             </span>
           )}
         </div>
+        {errors && errors.root && errors.root.serverError && (
+          <span className={style['error-message']}>
+            Hubo un error de servidor, intenta de nuevo mas tarde
+          </span>
+        )}
       </form>
     </div>
   );

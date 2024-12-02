@@ -3,22 +3,21 @@ import { StarIcon } from './Icons';
 import { PlatformLabels } from './PlatformLabels';
 import { useAuth } from '../hooks/useAuth';
 import { useFetch } from '../hooks/useFetch';
-import { useCallback } from 'react';
+import { useCallback, useState } from 'react';
 import { StarSet } from './StarSet';
 import placeholder from '../assets/images/thumbnail_placeholder.png';
 import { useNavigate } from 'react-router-dom';
 import { HttpError } from '../utilities/error';
 import { addScore, updateScore } from '../api/score';
 
-function fetchScore(gameId, token, signal) {
+function fetchScore(gameId, token) {
   return fetch(`http://localhost/juego/${gameId}/calificacion`, {
     method: 'GET',
     credentials: 'include',
     headers: {
       'Content-Type': 'application/json',
       Authorization: `Bearer ${token}`
-    },
-    signal
+    }
   })
     .then((res) => {
       if (!res.ok) {
@@ -36,18 +35,15 @@ export function GameCard({
   id,
   title,
   image,
-  score,
-  totalScores,
+  initialScore,
+  initialTotalScores,
   ageRating,
   platforms
 }) {
   const navigate = useNavigate();
 
   const { isAuthenticated, token } = useAuth();
-  const fetchFn = useCallback(
-    (signal) => fetchScore(id, token, signal),
-    [id, token]
-  );
+  const fetchFn = useCallback(() => fetchScore(id, token), [id, token]);
   const {
     data: userScore,
     setData: setUserScore,
@@ -56,6 +52,31 @@ export function GameCard({
   } = useFetch(fetchFn, {
     shouldFetch: isAuthenticated
   });
+
+  const [score, setScore] = useState(parseInt(initialScore) || 0);
+  const [totalScores, setTotalScores] = useState(initialTotalScores);
+
+  function handleStarClick(stars) {
+    if (userScore) {
+      return updateScore(userScore.id, token, stars).then(() => {
+        setScore(
+          (prevScore) =>
+            (prevScore * totalScores - userScore.estrellas + stars) /
+            totalScores
+        );
+        setUserScore({ ...userScore, estrellas: stars });
+      });
+    } else {
+      return addScore(id, token, stars).then((data) => {
+        setScore((prevScore) => {
+          return (prevScore * totalScores + stars) / (totalScores + 1);
+        });
+        setTotalScores((prevTotalScores) => prevTotalScores + 1);
+        setUserScore(data);
+      });
+    }
+  }
+
   return (
     <div className={style.card}>
       <div className={style['thumbnail-section']}>
@@ -78,7 +99,7 @@ export function GameCard({
             <StarIcon size="1.2em"></StarIcon>
             <span>
               {score
-                ? `${parseInt(score).toFixed(1)} en ${totalScores} puntuaciones`
+                ? `${score.toFixed(1)} en ${totalScores} puntuaciones`
                 : 'No hay reseñas disponibles'}
             </span>
           </div>
@@ -92,14 +113,7 @@ export function GameCard({
               <>
                 <StarSet
                   initialScore={userScore ? userScore.estrellas : 0}
-                  onStarClick={(stars) => {
-                    if (userScore) updateScore(userScore.id, token, stars);
-                    else {
-                      return addScore(id, token, stars).then((data) =>
-                        setUserScore(data)
-                      );
-                    }
-                  }}
+                  onStarClick={handleStarClick}
                 ></StarSet>
                 <p>{userScore ? 'Tu calificacion' : 'Sin calificar'} </p>
               </>

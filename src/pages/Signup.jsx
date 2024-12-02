@@ -9,7 +9,7 @@ function signup(data) {
     body: JSON.stringify(data),
     headers: { 'Content-Type': 'application/json' }
   }).then((res) => {
-    if (!res.ok && res.status !== 400) {
+    if (!res.ok && res.status !== 400 && res.status !== 409) {
       throw new Error('Error al registrarse');
     }
     return res.json();

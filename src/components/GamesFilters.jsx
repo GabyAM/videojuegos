@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useFetch } from '../hooks/useFetch';
 import style from '../assets/styles/gamesfilters.module.css';
 import { HttpError } from '../utilities/error';
@@ -57,10 +57,11 @@ export function GamesFilters({ onChangeFilters }) {
       ></input>
       <div className={style['left-section']}>
         <select
+          defaultValue=""
           disabled={isLoadingPlatforms || errorPlatforms}
           onChange={(e) => setPlatform(e.target.value)}
         >
-          <option selected disabled hidden>
+          <option value="" disabled hidden>
             Plataforma
           </option>
           <option value="">Sin especificar</option>

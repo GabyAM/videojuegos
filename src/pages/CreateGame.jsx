@@ -39,7 +39,7 @@ export function CreateGame() {
     control
   } = useForm();
 
-  if (!isAuthenticated || !user.es_admin) return;
+  if (!isAuthenticated || !user.es_admin) return navigate('/');
 
   function handleFormSubmit(formData) {
     if (isSubmitting) return;
@@ -129,7 +129,7 @@ export function CreateGame() {
         </div>
         <div className={style['input-container']}>
           <h3>Plataformas</h3>
-          {['PC', 'PS', 'XBOX', 'Android', 'Otros'].map((platform) => (
+          {['PC', 'PS', 'XBOX', 'Android', 'Otro'].map((platform) => (
             <div key={platform}>
               <label htmlFor={platform}>{platform}</label>
               <input

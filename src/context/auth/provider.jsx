@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { jwtDecode } from 'jwt-decode';
 import { AuthContext } from './context';
 
@@ -35,11 +35,23 @@ export function AuthProvider({ children }) {
     setIsLoading(false);
   }
 
-  function removeToken() {
+  const removeToken = useCallback(() => {
     localStorage.removeItem('token');
     setToken({ encoded: null, decoded: null });
     setIsLoading(false);
-  }
+  }, []);
+
+  const handleSetTimer = useCallback(() => {
+    if (!token.decoded) return;
+    const expirationTime = token.decoded.exp * 1000 - Date.now();
+    const expirationTimer = setTimeout(removeToken, expirationTime - 60000); // un minuto antes de que expire
+    return expirationTimer;
+  }, [token, removeToken]);
+
+  useEffect(() => {
+    const timer = handleSetTimer();
+    return () => clearTimeout(timer);
+  }, [token, handleSetTimer]);
 
   return (
     <AuthContext.Provider
