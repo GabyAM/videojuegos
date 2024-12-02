@@ -2,6 +2,20 @@
 
 Hecha por Gabriel Miranda
 
+
+## Reentrega - Cambios
+
+En base a la devolución del trabajo, se realizaron los siguientes arreglos:
+- Se arreglaron los errores de validación en los formularios de Login y registro, ahora aparece como error de campo cuando el nombre o clave es incorrecto. También ahora se muestra un mensaje general en el formulario si algo salió mal.
+- Actualizar la calificación de un juego ahora hace que se actualize el promedio en la tarjeta.
+- Se agregó el componente NavBar
+- Se mejoró el sistema de autenticación para que usuario sea expulsado automáticamente cuando pase el tiempo del token
+- Al cerrar sesión en el formulario de juego se redirige al usuario al home
+- Las plataformas funcionan en el formulario de juego
+- Las imagenes de los juegos ahora son visibles en la pagina de detalle
+- Se modificó el funcionamiento del filtro de clasificacion de edad
+- Se creó una nueva clase de excepción en la API para manejar errores de validación de forma mas fácil.
+
 ## Cambios hechos en API
 
 - Se añadió endpoint para hacer fetch a plataformas
